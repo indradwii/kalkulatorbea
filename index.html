@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator Pajak Impor</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+        }
+        input, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Kalkulator Pajak Impor Barang Jepang</h1>
+    <label for="harga">Harga Barang (Yen):</label>
+    <input type="number" id="harga" placeholder="Masukkan harga barang" />
+
+    <label for="ongkir">Ongkos Kirim (Yen):</label>
+    <input type="number" id="ongkir" placeholder="Masukkan ongkos kirim" />
+
+    <label for="kurs">Kurs Yen ke Rupiah:</label>
+    <input type="number" id="kurs" placeholder="Masukkan kurs" value="105.23" />
+
+    <label for="npwp">PPh dengan NPWP:</label>
+    <input type="checkbox" id="npwp" />
+
+    <button onclick="hitungPajak()">Hitung Pajak</button>
+
+    <h2>Hasil Perhitungan:</h2>
+    <p id="totalRupiah"></p>
+    <p id="totalPajak"></p>
+    <p id="totalHarga"></p>
+</div>
+
+<script>
+    function hitungPajak() {
+        const hargaBarang = parseFloat(document.getElementById('harga').value) || 0;
+        const ongkosKirim = parseFloat(document.getElementById('ongkir').value) || 0;
+        const kurs = parseFloat(document.getElementById('kurs').value) || 0;
+        const npwp = document.getElementById('npwp').checked;
+
+        const totalYen = hargaBarang + ongkosKirim;
+        const totalRupiah = totalYen * kurs;
+
+        const beaMasuk = totalRupiah * 0.075;
+        const dpp = totalRupiah + beaMasuk;
+        const ppn = dpp * 0.11;
+        const pph = dpp * (npwp ? 0.1 : 0.2);
+        const totalPajak = beaMasuk + ppn + pph;
+
+        const totalHarga = totalRupiah + totalPajak;
+
+        document.getElementById('totalRupiah').innerText = `Total dalam Rupiah: Rp ${totalRupiah.toFixed(2)}`;
+        document.getElementById('totalPajak').innerText = `Total Pajak: Rp ${totalPajak.toFixed(2)}`;
+        document.getElementById('totalHarga').innerText = `Total Harga + Pajak: Rp ${totalHarga.toFixed(2)}`;
+    }
+</script>
+
+</body>
+</html>

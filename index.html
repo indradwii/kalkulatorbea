@@ -74,9 +74,9 @@
 
         const totalHarga = totalRupiah + totalPajak;
 
-        document.getElementById('totalRupiah').innerText = `Total dalam Rupiah: Rp ${totalRupiah.toFixed(2)}`;
-        document.getElementById('totalPajak').innerText = `Total Pajak: Rp ${totalPajak.toFixed(2)}`;
-        document.getElementById('totalHarga').innerText = `Total Harga + Pajak: Rp ${totalHarga.toFixed(2)}`;
+        document.getElementById('totalRupiah').innerText = `Total dalam Rupiah: Rp ${totalRupiah.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+        document.getElementById('totalPajak').innerText = `Total Pajak: Rp ${totalPajak.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
+        document.getElementById('totalHarga').innerText = `Total Harga + Pajak: Rp ${totalHarga.toLocaleString('id-ID', { minimumFractionDigits: 2 })}`;
     }
 </script>
 
